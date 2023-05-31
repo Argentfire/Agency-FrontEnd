@@ -33,13 +33,13 @@
             return parent;
         }
 
-        $scope.testFunc = function(e)
+        $scope.FilterByVehicle = function(e)
         {
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
 
-            for(var foo of document.getElementsByClassName("vehicle-filter-button")) {
-                foo.style.backgroundColor = "rgba(121, 165, 181, 1)";
+            for(var button of document.getElementsByClassName("vehicle-filter-button")) {
+                button.style.backgroundColor = "rgba(121, 165, 181, 1)";
             }
 
             elem.css('background', 'rgba(82, 124, 139,1)');
@@ -74,7 +74,7 @@
                 for(var item of destinationFilters) {
                     for(var i = 0; i < filteredJourneys.length; i++)
                     {
-                        if(filteredJourneys[i].innerHTML.includes(item.value)) {
+                        if(filteredJourneys[i].innerHTML.includes("Destination: " + item.value)) {
                             item.style.display = "block";
                         }
                     }
@@ -82,6 +82,45 @@
             }
         }
 
+        $scope.FilterByDestination = function(e) {
+            var elemID = GetElementID(e);
+            console.log(elemID);
+
+            for(var button of document.getElementsByClassName("destination-filter-button")) {
+                button.style.backgroundColor = "rgba(121, 165, 181, 1)";
+            }
+
+            GetElement(e).css('background', 'rgba(82, 124, 139,1)');
+
+            var journeys = document.getElementsByClassName("journeyData");
+            if(elemID == "btnDestAll") {
+                for(item of journeys) {
+                    item.style.display = "flex";
+                }
+            }
+            else {
+                for(item of journeys) {
+                    item.style.display = "none";
+                    if(item.innerHTML.includes("Destination: " + GetClickedButtonText(e))) {
+                        item.style.display = "flex";
+                    }
+                }
+            }
+        }
+
+        function GetElement(e) {
+            return angular.element(e.srcElement);
+        }
+
+        function GetElementID(element) {
+            var elem = angular.element(element.srcElement);
+            return elem.attr("id");
+        }
+
+        function GetClickedButtonText(e) {
+            var elem = angular.element(e.srcElement);
+            return elem.attr("value");
+        }
 
 
         var filterDest = function(e) {
