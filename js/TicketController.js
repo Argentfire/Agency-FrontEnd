@@ -1,31 +1,30 @@
 (function() { 
     var module = angular.module("Agency");
 
-    var TicketController = function($scope, $http, $injector) {
+    var TicketController = function($scope, agency) {
         $scope.minPrice = 0;
         $scope.maxPrice = 100;
 
         var journeys;
         var vehicles;
 
-        var HandleJourneyData = function(response) { 
-            $scope.journeys = response.data;
-            journeys = response.data;
-            // DisplayTicketOptions(response.data);
+        var HandleJourneyData = function(data) { 
+            $scope.journeys = data;
+            journeys = data;
         }
 
-        var HandleVehicleData = function(response) {
-            $scope.vehicles = response.data;
-            vehicles = response.data;
+        var HandleVehicleData = function(data) {
+            $scope.vehicles = data;
+            vehicles = data;
         }
 
-        var LowerTicketCount = function(e) {
+        $scope.LowerTicketCount = function(e) {
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
             var parentEle = document.getElementById(triggerType).parentElement;
         }
 
-        var RaiseTicketCount = function(e) {
+        $scope.RaiseTicketCount = function(e) {
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
             var parentEle = document.getElementById(triggerType).parentElement;
@@ -36,7 +35,7 @@
             
         }
 
-        var AddToCart = function (e) {
+        $scope.AddToCart = function (e) {
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
             var parentEle = document.getElementById(triggerType).parentElement;
@@ -45,27 +44,6 @@
             var ticketCount = parentEle.getElementsByClassName("journeyTicketCount")[0];
 
             alert(ticketCount.textContent);
-        }
-
-        function LowerTicketCountClickEvent() {
-            var buttons = document.getElementsByClassName("ticketCountButtonSubtr");
-            for(var btn of buttons) {
-                btn.addEventListener("click", LowerTicketCount);
-            }
-        }
-
-        function RaiseTicketCountClickEvent() {
-            var buttons = document.getElementsByClassName("ticketCountButtonAdd");
-            for(var btn of buttons) {
-                btn.addEventListener("click", RaiseTicketCount);
-            }
-        }
-
-        function AddToCartClickEvent() {
-            var buttons = document.getElementsByClassName("addToCart");
-            for(var btn of buttons) {
-                btn.addEventListener("click", AddToCart);
-            }
         }
 
         function GetParentElement(elem) {
@@ -95,8 +73,8 @@
             return ((percent/ 100) * total).toFixed(2);
         }
 
-        $http.get("https://localhost:7084/Journey").then(HandleJourneyData);
-        $http.get("https://localhost:7084/Vehicle").then(HandleVehicleData);
+        agency.getJourneys().then(HandleJourneyData);
+        agency.getVehicles().then(HandleVehicleData);
     }; 
 
     module.controller("TicketController", TicketController);

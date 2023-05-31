@@ -1,15 +1,15 @@
 (function() {
     var module = angular.module("Agency");
 
-    var JourneyController = function($scope, $http) {
+    var JourneyController = function($scope, agency) {
         
         var journeys = [];
-        var onJourneysComplete = function(response) {
-            $scope.journeys = response.data;
-            journeys = response.data;
+        var onJourneysComplete = function(data) {
+            $scope.journeys = data;
+            journeys = data;
             
             var destinations = [];
-            for(var item of response.data) {
+            for(var item of journeys) {
                 if(destinations.includes(item.destination) == false)
                 {
                     destinations.push(item.destination);
@@ -18,12 +18,6 @@
             $scope.destinations = destinations;
             document.getElementById("btnAll").style.backgroundColor = "rgba(82, 124, 139,1)";
             document.getElementById("btnDestAll").style.backgroundColor = "rgba(82, 124, 139,1)";
-            // AddFilterDestBtnsClickEvent();
-        }
-
-        $scope.asdf = function(event) {
-            var elementId = event.target.id;
-            alert("Element ID: " + elementId);
         }
 
         function GetParentElement(elem) {
@@ -161,8 +155,9 @@
                 btn.addEventListener("click", filterDest);
             }
         }
-
-        $http.get("https://localhost:7084/Journey").then(onJourneysComplete);
+        
+        agency.getJourneys().then(onJourneysComplete);
+        // $http.get("https://localhost:7084/Journey").then(onJourneysComplete);
     };
 
     module.controller("JourneyController", JourneyController);
