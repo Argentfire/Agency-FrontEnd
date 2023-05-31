@@ -156,7 +156,7 @@
             }
         }
         
-        agency.getJourneys().then(onJourneysComplete);
+        agency.getDataArray("Journey").then(onJourneysComplete);
         // $http.get("https://localhost:7084/Journey").then(onJourneysComplete);
     };
 

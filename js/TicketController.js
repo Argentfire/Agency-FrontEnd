@@ -22,6 +22,17 @@
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
             var parentEle = document.getElementById(triggerType).parentElement;
+            var par = elem.attr("parent");
+            // console.log(triggerType);
+            var foo = parentEle.parentElement;
+            var ticket = angular.element(foo);
+            var ticketCountLabel = angular.element(document.querySelector("#lblTicketCount"));
+            var ticketCount = ticketCountLabel.text();
+            console.log(ticketCount);
+            // var ticketCount.text();
+            if(ticketCount.text() >= 1) {
+                ticketCount.text();
+            }
         }
 
         $scope.RaiseTicketCount = function(e) {
@@ -53,6 +64,10 @@
             return parent;
         }
 
+        function GetTicketCard(element) {
+
+        }
+
         $scope.QueryVehicle = function(vehicleID) {
             for(var veh of vehicles) {
                 if(veh.vehicleID === vehicleID)
@@ -73,8 +88,8 @@
             return ((percent/ 100) * total).toFixed(2);
         }
 
-        agency.getJourneys().then(HandleJourneyData);
-        agency.getVehicles().then(HandleVehicleData);
+        agency.getDataArray("Journey").then(HandleJourneyData);
+        agency.getDataArray("Vehicle").then(HandleVehicleData);
     }; 
 
     module.controller("TicketController", TicketController);
