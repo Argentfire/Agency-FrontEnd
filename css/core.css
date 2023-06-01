@@ -10,10 +10,13 @@ header {
     -o-background-size: cover;
     background-size:cover;
     height: 225px;
-    display:flex;
-    flex-direction: column;
+    /* display:flex;
+    flex-direction: column; */
 }
 nav {
+    position: absolute;
+    width: 100%;
+    top: 0;
     background-color: rgba(66, 66, 66, 0.75);
 }
 nav ul {
@@ -80,3 +83,57 @@ footer .content a {
     color: blue;
 }
 /*#endregion*/
+
+@media only screen and (max-width: 825px) {
+    
+    main .page {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    nav {
+        left: -10px;
+    }
+
+    nav ul {
+        gap: 10px;
+        justify-content: space-between;
+    }
+
+    nav ul li a {
+        font-size: 0.8em;
+    }
+    footer .content {
+        left: 5%;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    nav {
+        width: auto;
+        top: auto;
+        background-color: rgba(66, 66, 66, 0.75);
+    }
+    nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: left;
+        align-items: flex-start;
+        flex-shrink: 2;
+    }
+
+    nav ul li {
+        flex-shrink: 2;
+        width: 35%;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+    }
+    footer {
+        display: none;
+    }
+}
