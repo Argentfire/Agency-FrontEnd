@@ -15,7 +15,9 @@
                 </aside>
                 </aside>
                 <aside class="ticketsBox">
-                    {{transactionStatus}}
+                    <div id="post-status" class="post-status">
+                        <h3 id="post-status-text" class="post-status-text">{{transactionStatus}}</h3>
+                    </div>
                     <div id="ticketsList" class="ticketsList">
                         <div id="ticketCard{{$index}}" class="ticketElement" ng-repeat="item in journeys">
                             <div class="tripData">
@@ -28,19 +30,27 @@
                                 </h5>
                             </div>
                             <div class="ticket-controls">
-                                <input id="btnLowerTicketCount{{$index}}" class="ticketCountButtonSubtr" type="button" value="-" ng-click="LowerTicketCount($event)">
-                                <label id="lblTicketCount{{$index}}" class="journeyTicketCount">{{($index + 1) * 3}}</label>
+                                <input id="btn-lower-ticket-count{{$index}}" class="ticketCountButtonSubtr" type="button" value="-" ng-click="LowerTicketCount($event)">
+                                <label id="lbl-ticket-count{{$index}}" class="journeyTicketCount">1</label>
                                 <input id="btnRaiseTicketCount{{$index}}" class="ticketCountButtonAdd" type="button" value="+" ng-click="RaiseTicketCount($event)">
                             </div>
-                            <button id="add-to-cart{{$index}}" class='addToCart' type='submit' ng-click="AddToCart($event)">
+                            <button id="add-to-cart{{$index}}" class='add-to-cart' type='submit' ng-click="AddToCart($event)">
                                 <img id="add-to-cart{{$index}}" src='./assets/images/cart_add.svg' width='27px'>
                                 Add to Cart
                             </button>
                         </div>
                     </div>
+                    <div class="shopping-cart">
+                        <h4>Shopping Cart:</h4>
+                        <h5 ng-repeat="item in tickets">
+                            Ticket #{{$index}}: {{item.price}} BGN
+                        </h5>
+                        <hr>
+                        <h5>Total:{{getTotalPrice()}} BGN<br></h5><!-- [{{item.startLocation}} -> {{item.destination}}]-->
+                    </div>
                     <div class="orderControls">
-                        <input class="finishOrder" type="button" value="Finish Order"/>
-                        <input class="clearCart" type="button" value="Clear Cart"/>
+                        <input class="finishOrder" type="button" value="Finish Order" ng-click="finishOrder()"/>
+                        <input class="clearCart" type="button" value="Clear Cart" ng-click="clearCart()"/>
                     </div>
                 </aside>
             </div>
