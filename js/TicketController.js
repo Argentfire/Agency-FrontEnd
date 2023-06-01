@@ -4,9 +4,10 @@
     var TicketController = function($scope, agency) {
         $scope.minPrice = 0;
         $scope.maxPrice = 100;
-
+        $scope.transactionStatus = "";
         var journeys;
         var vehicles;
+        const tickets = [];
 
         var HandleJourneyData = function(data) { 
             $scope.journeys = data;
@@ -20,52 +21,65 @@
 
         $scope.LowerTicketCount = function(e) {
             var elem = angular.element(e.srcElement);
-            var triggerType = elem.attr('id');
-            var parentEle = document.getElementById(triggerType).parentElement;
-            var par = elem.attr("parent");
-            // console.log(triggerType);
-            var foo = parentEle.parentElement;
-            var ticket = angular.element(foo);
-            var ticketCountLabel = angular.element(document.querySelector("#lblTicketCount"));
-            var ticketCount = ticketCountLabel.text();
-            console.log(ticketCount);
-            // var ticketCount.text();
-            if(ticketCount.text() >= 1) {
-                ticketCount.text();
+            var ticketCardIdx = GetNumberFromString(elem.attr('id'));
+            var ticketCountLabel = document.getElementById(`lblTicketCount${ticketCardIdx}`);
+            console.log(ticketCountLabel.id);
+            var ticketCount = Number(ticketCountLabel.textContent);
+            if(ticketCount >= 1) {
+                ticketCountLabel.textContent = ticketCount - 1;
             }
         }
 
         $scope.RaiseTicketCount = function(e) {
             var elem = angular.element(e.srcElement);
-            var triggerType = elem.attr('id');
-            var parentEle = document.getElementById(triggerType).parentElement;
-
-            var ticketCount = parentEle.getElementsByClassName("journeyTicketCount")[0];
-
-            alert(ticketCount.textContent);
+            var ticketCardIdx = GetNumberFromString(elem.attr('id'));
+            var ticketCountLabel = document.getElementById(`lblTicketCount${ticketCardIdx}`);
+            console.log(ticketCountLabel.id);
+            var ticketCount = Number(ticketCountLabel.textContent);
+            if(ticketCount < 10) {
+                ticketCountLabel.textContent = ticketCount + 1;
+            }
             
         }
 
         $scope.AddToCart = function (e) {
-            var elem = angular.element(e.srcElement);
-            var triggerType = elem.attr('id');
-            var parentEle = document.getElementById(triggerType).parentElement;
-            // var parentEle = GetParentElement(elem);
-
-            var ticketCount = parentEle.getElementsByClassName("journeyTicketCount")[0];
-
-            alert(ticketCount.textContent);
+            try {
+                var elem = angular.element(e.srcElement);
+                var ticketCardIdx = GetNumberFromString(elem.attr('id'));
+                var journeyDetails = document.getElementById(`journey-details${ticketCardIdx}`);
+                var ticketCountLabel = document.getElementById(`lblTicketCount${ticketCardIdx}`);
+                console.log(ticketCountLabel.id);
+                var ticketCount = Number(ticketCountLabel.textContent);
+                let jrny = journeys[ticketCardIdx];
+                let jrnyPrice = 0;
+                const regex = /Price: (\d+)/;
+                const matches = journeyDetails.innerText.match(regex);
+                if (matches && matches.length > 1) {
+                    jrnyPrice = parseInt(matches[1]);
+                }
+                
+                let ticket = new Ticket(jrny.startLocation, jrny.destination, jrny.distance, jrnyPrice, ticketCount);
+                tickets.push(ticket);
+                
+                console.clear();
+                console.log(tickets);
+            } catch (err) {
+                alert("An error ocurred!\nPlease alert developers!");
+            }
         }
 
-        function GetParentElement(elem) {
-            var triggerType = elem.attr('id');
-            var parent = document.getElementById(triggerType).parentElement;
+        $scope.finishOrder = function(e) {
 
-            return parent;
         }
 
-        function GetTicketCard(element) {
+        $scope.clearCart = function(e) {
 
+        }
+
+        function GetNumberFromString(str)
+        {
+            if(str == null) return "";
+            return str.replace(/\D/g, '');
         }
 
         $scope.QueryVehicle = function(vehicleID) {
@@ -83,9 +97,6 @@
             else if(veh.includes('Train')) html += "train.jpg";
             else if(veh.includes('Bus')) html += "bus.jpg";
             return html;
-        }
-        function percentage(percent, total) {
-            return ((percent/ 100) * total).toFixed(2);
         }
 
         agency.getDataArray("Journey").then(HandleJourneyData);
