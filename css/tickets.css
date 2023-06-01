@@ -41,6 +41,19 @@
     color: #FFF;
 }
 
+.filterBox .apply-filter {
+    padding: 2.5px 5px;
+    background-color: rgb(132, 207, 66);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #FFF;
+
+    border-style: none;
+    border-radius: 10px;
+    
+}
+
 .filterBox .clear-filter {
     padding: 2.5px 5px;
     background-color: rgb(250, 134, 134);
