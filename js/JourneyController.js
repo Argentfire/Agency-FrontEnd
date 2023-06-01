@@ -16,8 +16,8 @@
                 }
             }
             $scope.destinations = destinations;
-            document.getElementById("btnAll").style.backgroundColor = "rgba(82, 124, 139,1)";
-            document.getElementById("btnDestAll").style.backgroundColor = "rgba(82, 124, 139,1)";
+            document.getElementById("btn-all").style.backgroundColor = "rgba(82, 124, 139,1)";
+            document.getElementById("btn-dest-all").style.backgroundColor = "rgba(82, 124, 139,1)";
         }
 
         function GetParentElement(elem) {
@@ -39,7 +39,7 @@
             elem.css('background', 'rgba(82, 124, 139,1)');
             
             var veh = triggerType.replace("btn", "");
-            var journeyElements = document.getElementsByClassName("journeyData");
+            var journeyElements = document.getElementsByClassName("journey-data");
             var destinationFilters = document.getElementsByClassName("destination-filter-button");
             for(var item of journeyElements) {
                 item.style.display = "none";
@@ -86,8 +86,8 @@
 
             GetElement(e).css('background', 'rgba(82, 124, 139,1)');
 
-            var journeys = document.getElementsByClassName("journeyData");
-            if(elemID == "btnDestAll") {
+            var journeys = document.getElementsByClassName("journey-data");
+            if(elemID == "btn-dest-all") {
                 for(item of journeys) {
                     item.style.display = "flex";
                 }
@@ -121,8 +121,8 @@
             var elem = angular.element(e.srcElement);
             var triggerType = elem.attr('id');
             console.log(triggerType);
-            var dest = triggerType.replace("btnDest", "");
-            var iJourneys = document.getElementsByClassName("journeyData");
+            var dest = triggerType.replace("btn-dest", "");
+            var iJourneys = document.getElementsByClassName("journey-data");
             for(var i of iJourneys)
                 i.style.display = "block";
             if(dest.includes("All") == false) {

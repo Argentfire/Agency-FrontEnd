@@ -41,7 +41,7 @@
     color: #FFF;
 }
 
-.filterBox .clearFilter {
+.filterBox .clear-filter {
     padding: 2.5px 5px;
     background-color: rgb(250, 134, 134);
     font-family: 'Open Sans', sans-serif;
@@ -54,7 +54,7 @@
     
 }
 
-.ticketsBox {
+.tickets-box {
     width: 100%;
     border-style: none;
     border-radius: 15px;
@@ -82,7 +82,7 @@
     align-self: center;
 }
 
-.ticketsList {
+.tickets-list {
     margin: 15px 10px;
     padding: 10px 10px;
     background-color: rgba(121, 165, 181, 0.85);
@@ -95,7 +95,7 @@
     border-radius: 15px;
 }
 
-.ticketElement {
+.ticket-element {
     background-color: rgba(74, 98, 107, .85);
 
     border-radius: 15px;
@@ -111,14 +111,14 @@
     gap: 10px;
 }
 
-.tripData {
+.trip-data {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.ticketElement h5 {
+.ticket-element h5 {
     color: #FFF;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
@@ -137,7 +137,7 @@
     color: #FFF;
 }
 
-.ticketCountButtonSubtr, .ticketCountButtonAdd {
+.ticket-count-button-subtr, .ticket-count-button-add {
     font-size: 1.2em;
     font-weight: bold;
     border-style: none;
@@ -147,15 +147,15 @@
 }
 
 
-.ticketCountButtonSubtr:hover, .ticketCountButtonAdd:hover {
+.ticket-count-button-subtr:hover, .ticket-count-button-add:hover {
     cursor: pointer;
 }
 
-.ticketCountButtonSubtr {
+.ticket-count-button-subtr {
     background-color: rgb(250, 134, 134);
 }
 
-.ticketCountButtonAdd {
+.ticket-count-button-add {
     background-color: rgb(132, 207, 66);
 }
 .add-to-cart {
@@ -199,7 +199,7 @@
     color: #FFF;
 }
 
-.orderControls {
+.order-controls {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -208,7 +208,7 @@
     padding-bottom: 10px;
 }
 
-.finishOrder, .clearCart {
+.finish-order, .clear-cart {
     border-style: none;
     border-radius: 10px;
 
@@ -221,18 +221,18 @@
     color: #FFF;
 }
 
-.finishOrder:hover {
+.finish-order:hover {
     cursor: pointer;
 }
-.clearCart:hover {
+.clear-cart:hover {
     cursor: pointer;
 }
 
-.finishOrder {
+.finish-order {
     background-color: rgb(132, 207, 66);
     height: 35px;
 }
-.clearCart {
+.clear-cart {
     background-color: rgb(250, 134, 134);
     height: 35px;
 }
