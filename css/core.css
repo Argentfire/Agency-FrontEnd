@@ -3,6 +3,10 @@
 /*#endregion*/
 
 /*#region Banner */
+html {
+    background-color: rgba(42,78,91,1);
+}
+
 header {
     background: rgba(66, 66, 66, 0.538) url(../assets/images/header_logo.png) no-repeat top center;
     -webkit-background-size: cover;
@@ -15,8 +19,8 @@ header {
 }
 nav {
     position: absolute;
-    width: 100%;
-    top: 0;
+    width: 99%;
+    top: 7px;
     background-color: rgba(66, 66, 66, 0.75);
 }
 nav ul {
@@ -110,9 +114,10 @@ footer .content a {
 
 @media only screen and (max-width: 390px) {
     nav {
+        /* transform: translateX(-10px); */
         width: auto;
         top: auto;
-        background-color: rgba(66, 66, 66, 0.75);
+        background-color: rgba(42, 78, 91, 0.85);
     }
     nav ul {
         list-style: none;
